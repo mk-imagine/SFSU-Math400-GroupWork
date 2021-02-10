@@ -1,0 +1,14 @@
+mult = 100;         % multiplierev
+
+nexpts = 4;         % number of experiments
+npts = 100;         % number of points generated (initial)
+ev = zeros(4,3);    % approximation to integral and standard deviation
+
+for i=1:nexpts
+    x=rand(npts,2); y=rand(npts,1);         % generate points in [0,2] x [0,1]
+    nhits = ((x.^2)/4 + y.^2 <=1);          % points in quarter circle
+    ev(i,1) = 4.0*mean(nhits);              % approximation to pi
+    cfd = 4.0*std(nhits)/sqrt(npts);        % Standard deviation in approximation
+    ev(i,2) = ev(i,1)-cfd; ev(i,3) = ev(i,1)+cfd;
+    npts = mult*npts;
+end
