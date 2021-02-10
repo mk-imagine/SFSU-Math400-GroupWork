@@ -22,8 +22,8 @@
 % count the number of points inside the ellipse 
  if (x^2 / 4 + y^2 <= 1)
  inside = inside + 1;
- end;
- end;
+ end
+ end
 
  %estimate the area inside the ellipse 
  area = inside / 1000 * 8
