@@ -6,23 +6,9 @@
 
 
 % plot the ellipse
-a = 2;
-b = 1;
-x0 = 0;
-y0 = 0;
-t = -pi:0.1:pi;
-x = a*cos(t);
-y = b*sin(t);
-
-figure(1); clf; 
-    
-plot(x,y,'b','linewidth',1)
-set(gca, 'fontsize', 12)
-xlabel('X')
-ylabel('Y')
-grid on
-
-hold on
+ x = [-2 : 0.01 : 2]; y = sqrt(1 - x.^2/4);
+ plot(x,y,-x,-y);
+ hold on
 % plot 1000 random points in the ellipse and count how many landed inside
  inside = 0; 
  npts = 1000;
