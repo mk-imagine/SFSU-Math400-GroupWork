@@ -2,7 +2,7 @@
 % Problem 5
 %
 % February 10, 2021
-% Group 2: Mark Kim, Amber Hardigan, Adrian Lopez, Nyan Tun, Alyssa Reyes
+% Group 2: Mark Kim, Amber Hartigan, Adrian Lopez, Nyan Tun, Alyssa Reyes
 
 % Initial Assumptions
 % x^2/a^2 + y^2/b^2 = 1
