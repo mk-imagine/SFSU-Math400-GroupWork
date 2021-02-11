@@ -4,46 +4,44 @@
 % February 10, 2021
 % Group 2: Mark Kim, Amber Hardigan, Adrian Lopez, Nyan Tun, Alyssa Reyes
 
+% Initial Assumptions
+% x^2/a^2 + y^2/b^2 = 1
+a = 2; b = 1;               % Parameters of Ellipse
+areaRectangle = 2*a * 2*b;  % Area of the rectangle
+areaEllipse = pi * a * b;   % Area of the Ellipse
 
-% plot the ellipse
-a = 2;
-b = 1;
-x0 = 0;
-y0 = 0;
+% Parametric plot of the ellipse
 t = -pi:0.1:pi;
 x = a*cos(t);
 y = b*sin(t);
-
 figure(1); clf; 
-    
 plot(x,y,'b','linewidth',1)
 set(gca, 'fontsize', 12)
 xlabel('X')
 ylabel('Y')
 grid on
-
 hold on
+
 % plot 1000 random points in the ellipse and count how many landed inside
- inside = 0; 
- npts = 1000;
- for counter = 1:npts
+inside = 0; outside = 0;    % Initialize & declare point counts
+npts = 1000;                % Number of points to be generated/plotted
+for counter = 1:npts
     % pick a random point in [-2,2]x[-1,1]
     x = 4*rand - 2;  y = 2*rand - 1;
     % plot the point
     plot(x,y, '.r', -x, -y);
     % check if the point is inside the ellipe
-    % count the number of points inside the ellipse 
     if (x^2 / 4 + y^2 <= 1)
-        inside = inside + 1;
+        inside = inside + 1;    % count the number of points inside the ellipse 
+    else
+        outside = outside + 1;  % count the number of points outside the ellipse 
     end
- end
+end
 
- %estimate the area inside the ellipse 
- area = inside / npts * 8;
+% estimate the area inside the ellipse 
+area = inside / npts * areaRectangle;   % percentage of points inside * area of the rectangle
  
- outside = npts-inside; 
- 
- %estimate the expected mean and variance of Xi
- mean = inside/npts * 1 + outside/npts * 0; 
- expectedArea = inside/npts * 1^2 + outside/npts * 0^2;
- variance = expectedArea - mean^2;
+%estimate the expected mean and variance of Xi
+mean = inside/npts * 1 + outside/npts * 0; 
+expectedArea = inside/npts * 1^2 + outside/npts * 0^2;
+variance = expectedArea - mean^2;
