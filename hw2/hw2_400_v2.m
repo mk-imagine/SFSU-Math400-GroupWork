@@ -1,4 +1,3 @@
-
 % Problem 5
 %
 % February 10, 2021
@@ -38,10 +37,42 @@ for counter = 1:npts
     end
 end
 
+fprintf('The estimated number of points indide the ellipse are');
+disp(inside);
+
 % estimate the area inside the ellipse 
 area = inside / npts * areaRectangle;   % percentage of points inside * area of the rectangle
- 
-%estimate the expected mean and variance of Xi
-mean = inside/npts * 1 + outside/npts * 0; 
+fprintf('The estimated area inside the ellipse is %f' ,area);
+
+% part C estimate the expected mean and variance of Xi
+mean = inside/npts * 1 + outside/npts * 0;
+fprintf('\n The estimated mean of X_i is %s' ,mean);
+
 expectedArea = inside/npts * 1^2 + outside/npts * 0^2;
+
 variance = expectedArea - mean^2;
+fprintf('\n The estimated variance of X_i is %s' ,variance);
+
+% part d
+estimatedMean = mean;
+fprintf('\n The estimated mean of the plotted points is %s' ,estimatedMean);
+
+estimatedVariance =  variance/1000;
+fprintf('\n The estimated variance of the plotted points is %s' ,estimatedVariance);
+
+standardDeviation = sqrt(estimatedVariance);
+fprintf('\n The standard deviation of the plotted points is %s' ,standardDeviation);
+
+
+% part e
+estimatedMean8A = 8 * mean;
+fprintf('\n The estimated mean of 8A_1000 is %s' ,estimatedMean8A);
+
+estimatedVariance8A =  64 * variance/1000;
+fprintf('\n The estimated variance of 8A_1000 is %s' ,estimatedVariance8A);
+
+standardDeviation8A = sqrt(estimatedVariance8A);
+fprintf('\n The standard deviation of 8A_1000 is %s' ,standardDeviation8A);
+
+confidence = (1 - standardDeviation8A) * 100
+fprintf('\n Based off of the standard deviation results, we are around .1 percent  off; thus, we have 90 percent confidence.')
