@@ -18,6 +18,7 @@ function c = bisect(a, b, delta)
 
 fa = f(a); 			%% compute initial values of f(a) and f(b)
 fb = f(b); 
+counter = 1;
 
 if  sign(fa) == sign(fb)	%% sanity check: f(a) and f(b) must have different
 				%% signs
@@ -26,7 +27,7 @@ if  sign(fa) == sign(fb)	%% sanity check: f(a) and f(b) must have different
 				%% exits
 	error('f must have different signs at the endpoints a and b.  Aborting.')
 end
-fprintf('initial interval:  a=%d, b=%d, fa=%d, fb=%d\n',a,b,fa,fb)
+fprintf('initial interval:\n\ta=%d, b=%d, fa=%d, fb=%d\n',a,b,fa,fb)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                                       %%
@@ -52,12 +53,14 @@ while ( abs(b - a) > 2*delta )	%% While the size of the interval is
 	end
 				%% Repeat the algorithm on the new interval
         fprintf('   a=%d, b=%d, fa=%d, fb=%d\n',a,b,fa,fb)
+        counter = counter + 1;
 end
+fprintf('iterations = %d',counter)
 %%
 %% put subroutines here
 %%
 %%
 function fx = f(x)
 %	%% Enter your function here.
-       fx = x^2-3; 
+       fx = x+10-exp(x); 
 	return;
