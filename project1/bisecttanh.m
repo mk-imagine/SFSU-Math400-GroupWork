@@ -1,4 +1,4 @@
-function c = bisect(a, b, delta)
+function [c, x, y] = bisecttanh(a, b, delta)
 %%
 %% bisect.m
 %% 
@@ -19,6 +19,8 @@ function c = bisect(a, b, delta)
 fa = f(a); 			%% compute initial values of f(a) and f(b)
 fb = f(b); 
 counter = 1;
+x = a;
+y = fa;
 
 if  sign(fa) == sign(fb)	%% sanity check: f(a) and f(b) must have different
 				%% signs
@@ -37,7 +39,7 @@ fprintf('initial interval:\n\ta=%d, b=%d, fa=%d, fb=%d\n',a,b,fa,fb)
 
 while ( abs(b - a) > 2*delta )	%% While the size of the interval is
 				%% larger than the tolerance
-
+    counter = counter + 1;
 	c = (b + a)/2;		%% Set c to be the midpoint of the interval
 
 	fc = f(c);		%% Calculate the value of f at c
@@ -46,21 +48,26 @@ while ( abs(b - a) > 2*delta )	%% While the size of the interval is
 				%% f must have a zero between c and b (by the 
 				%% Intermediate Value Theorem).
 		a = c; 	fa = fc;
+        x(counter) = a;
+        y(counter) = fa;
 	else 			%% This is the case where f(a) and f(c) are of 
 				%% different sign.
 			        %%	
 		b = c;	fb = fc;
+        x(counter) = b;
+        y(counter) = fb;
 	end
 				%% Repeat the algorithm on the new interval
         fprintf('   a=%d, b=%d, fa=%d, fb=%d\n',a,b,fa,fb)
-        counter = counter + 1;
 end
 fprintf('iterations = %d',counter)
+plot(x,y)
+
 %%
 %% put subroutines here
 %%
 %%
 function fx = f(x)
 %	%% Enter your function here.
-       fx = x+10-exp(x); 
+       fx = tanh(x); 
 	return;
