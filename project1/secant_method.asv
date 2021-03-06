@@ -34,21 +34,19 @@ while abs(f_x1) > TOL && itc < Nmax
     catch
         fprintf('Error! - derivative zero for x = %.8f\n', x0)
     end
-    if mod(itc,2)==0
-        subplot(4,2,itc/2+1)
-        s_y = ((f_x1 - f_x0)/(x1 - x0))*(s_x - x1) + f_x1;
-        plot(h_x, h_y, 'b-', s_x, s_y, 'r-');
-        title("Plot of f(x) with secant at x" + (itc) + ".")
-        grid('on');
-        xlabel('x'); 
-        ylabel('f(x)');
-    end
-    % disp('...press enter to continue')
-    % pause on; pause;
+    subplot(4,2,itc+1)
+    s_y = ((f_x1 - f_x0)/(x1 - x0))*(t_x - x1) + f_x1;
+    plot(h_x, h_y, 'b-', s_x, [f_x0,f_x1], 'r-');
+    title("Plot of f(x) with secant at x" + (itc) + ".")
+    grid('on');
+    xlabel('x'); 
+    ylabel('f(x)');
+    disp('...press enter to continue')
+    pause on; pause;
     x0   = x1;     x1 = x;
     f_x0 = f_x1; f_x1 = f(x1); 
     itc = itc + 1;
-    [itc x f_x1]
+    [x f_x1]
 end
 
 y = x1;
