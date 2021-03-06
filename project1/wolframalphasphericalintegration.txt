@@ -1,0 +1,1 @@
+\int_0^{2*pi} \int_{-pi/2}^{pi/2} \int_0^1 r^4*sin^4(p)*cos^4(t)+r^2*sin^2(p)*sin^2(t)+r^2*cos^2(p) dr dp dt
