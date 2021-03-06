@@ -26,7 +26,7 @@ c = x0;
 fc = f(x0);
 if abs(fc) <= delta             %% check to see if initial guess satisfies
   return;                       %% convergence criterion.
-end;
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                                       %%
@@ -64,7 +64,8 @@ while abs(fc) > delta % Continue until evaluation satisfies convergence criterio
     fprintf('x%d:  c=%d, fc=%d, error=%d\n',counter-1,c,fc,abs(2-c))
     c = c - fc/fpc;               %% Newton step
     fc = f(c);
-end;
+end
+end
 
 
 %%
@@ -74,9 +75,12 @@ end;
 function fx = f(x)
 	fx = tanh(x); %% Enter your function here.
 	return;
+end
+
 function fprimex = fprime(x)
 	fprimex = (sech(x))^2; %% Enter the derivative of your function here.
 	return;
+end
 
 
 %%After observing the plot of x0 = 1.08, the tangent bounce around in
