@@ -32,7 +32,7 @@ end;
 %% main routine                                                          %%
 %%                                                                       %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-p_x = linspace (-4, 4, 100); 
+p_x = linspace (-2, 2, 100); 
 p_y = f(p_x);
 fig1 = figure('position',[ 0 0 700 1000 ]);
 movegui(fig1, 'center');
@@ -44,11 +44,17 @@ while abs(fc) > delta,
     if fpc==0,                    %% if fprime is 0, abort.
         error('fprime is 0')        %% the error function prints message and exits
     end;
+
+    c = c - fc/fpc;               %% Newton step
+    fc = f(c);
   
     %%plot the tangent
     counter = counter + 1;
-    t_x = linspace (-4, 4, 10);
-    t_y = fpc*(t_x - c) + fc;
+    %p_x = linspace (-2, 2, 100); 
+    %p_y = f(p_x); 
+    t_x = linspace (x0-2, x0+2, 10);
+    t_y = fpc*t_x + (fc-fpc*x0);
+    %figure();
     subplot(4,2,counter)
     plot(t_x, t_y, 'r-', p_x, p_y, 'b-');
     title("Plot of f(x) with tangent at x" + (counter-1) + ".")
@@ -58,9 +64,10 @@ while abs(fc) > delta,
     disp('...press enter to continue')
     pause on; pause;
 
+
     fprintf('x%d:  c=%d, fc=%d, error=%d\n',counter-1,c,fc,abs(2-c))
-    c = c - fc/fpc;               %% Newton step
-    fc = f(c);
+
+  
 end;
 
 
