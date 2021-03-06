@@ -1,3 +1,8 @@
+% March 5, 2021
+% Code heavily based off of sample file provided on iLearn
+% Amber Hartigan (primary coder), Adrian Lopez, Nyan Tun, Alyssa Reyes,
+% and Mark Kim
+
 function [y,itc] = secant_method(x0, x1, TOL, Nmax )
 
 %SECANT_METHOD     approximate the root of an arbitrary function using 
@@ -21,39 +26,45 @@ function [y,itc] = secant_method(x0, x1, TOL, Nmax )
 f_x0 = f(x0); 
 f_x1 = f(x1);
 itc = 0;
-h_x = linspace (-4, 4, 100); 
+h_x = linspace (-4, 4); 
 h_y = f(h_x);
-t_x = linspace (-4, 4, 10);
-fig1 = figure('position',[ 0 0 700 1000 ]);
+s_x = linspace (-4, 4);
+fig1 = figure('position',[ 0 0 1000 1000 ]);
 movegui(fig1, 'center');
+n = [0;1]; xn = [x0; x1]; f_xn = [f_x0; f_x1];
+T = table(n,xn,f_xn);
 
 while abs(f_x1) > TOL && itc < Nmax
-    try
-        dx = (f_x1 - f_x0)/(x1-x0);
+    dx = (f_x1 - f_x0)/(x1-x0);
+    if dx == 0
+        T
+        error("Error: dx is zero between x%d = %.3f and x%d = %.3f.", height(T)-2, x0, height(T)-1, x1);
+    else
         x = x1 - f_x1/dx;
-    catch
-        fprintf('Error! - derivative zero for x = %.8f\n', x0)
     end
-    subplot(4,2,itc+1)
-    t_y = ((f_x1 - f_x0)/(x1 - x0))*(t_x - x1) + f_x1;
-    plot(h_x, h_y, 'b-', t_x, t_y, 'r-');
-    title("Plot of f(x) with secant at x" + (itc) + ".")
-    grid('on');
-    xlabel('x'); 
-    ylabel('f(x)');
-    disp('...press enter to continue')
-    pause on; pause;
+    if itc <= 7
+        subplot(4,2,itc+1)% itc/2+1)
+        s_y = ((f_x1 - f_x0)/(x1 - x0))*(s_x - x1) + f_x1;
+        plot(h_x, h_y, 'b-', s_x, s_y, 'r-');
+        title("Plot of f(x) with secant at x" + (itc) + ".")
+        grid('on');
+        xlabel('x'); 
+        ylabel('f(x)');
+    end
+    % disp('...press enter to continue')
+    % pause on; pause;
     x0   = x1;     x1 = x;
     f_x0 = f_x1; f_x1 = f(x1); 
     itc = itc + 1;
-    [x f_x1]
+    newRow = {itc+1, x1, f_x1};
+    T = [T; newRow];
 end
-
-y = x1;
-if abs(f_x1) > TOL
-    
-    itc = -1;
-end
+T
+% y = x1;
+% if abs(f_x1) > TOL
+%     
+%     itc = -1;
+% end
 
 function fx = f(x)
 %	%% Enter your function here.
