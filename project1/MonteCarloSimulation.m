@@ -2,21 +2,39 @@
 %Group 2
 %Goal: Probability that no customers wait for change
 
-numofpeople =50;    %50 people in line
-five= 0.5;          %probability that customer pays with 5 dollar bill
-ten= 0.5;           %probability that customre pays with 10 dollar bill
-register =0;        %register has no change
-bill = {5,10};
+numsims = 100000;               %number of simulations
+numofpeople =50;                %50 people in line
+num_wait = zeros(1,numsims);    % vector to store number of people who have to wait
+zero_wait = 0;                  % number of times there was zero wait
 
-for i=1:numofpeople
-    r = randi([1, 2], 1);   % Get a 1 or 2 randomly
-    thisCustomer = bill(r); % Dollar bill for current customer
+for i=1:numsims
+for j=1:numofpeople
+    wait = 0;       % number of people who had to wait
+    need_change = 0;% number of people needing change
+    fives = 0;      % number of fives in register
     
-    if(bill(r)== 1)
-       register = bill(r) + register; %add 5 to register if r is 1
+    randNum = rand; %random number being evaluated, if person does not need change (has a five)
+    if randNum <= 0.5
+            if need_change == 0     % if no one needs change
+                fives = fives + 1;  % add to fives bucket
+            else                    % else if someone needs change
+                need_change = need_change - 1;% reduce number of people that need change (no fives go in bucket)
+            end
+     % else if person needs change (has a ten)
     else
-        register = bill(r) + register; %add 10 to register if r is 2
-        register = register - 5;  %get 5 dollar change
-    end
-    
+            if fives == 0           % if fives bucket empty
+                wait = wait + 1;    % person has to wait
+                need_change = need_change + 1;% and add to number of people waiting for change
+            else                    % else if change is available
+                fives = fives - 1;  % give change (no wait)
+            end
+    end    
+end 
 end
+
+    num_wait(i) = wait;             % store number of people who had to wait
+    if wait == 0
+        zero_wait = zero_wait + 1;  % add to number of occurences of zero wait
+    end
+
+prob_zero_wait = zero_wait/numsims  % probability of zero wait time
