@@ -1,6 +1,7 @@
-%Monty Hall Simulation
-%Group 2
-%Goal: Probability that no customers wait for change
+% Monte Carlo Simulation
+% Project 1, Problem 1.2
+% Group 2
+% Goal: Probability that no customers wait for change
 
 numsims = 100000;               %number of simulations
 numofpeople =50;                %50 people in line
