@@ -1,7 +1,7 @@
-%% Math 400 Spring 2020 Project 1
-%% Section 3 Part B
-%% 
-
+% Math 400 Spring 2020 Project 1
+% Section 3 Part B
+% Amber Hartigan (primary coder), Adrian Lopez, Nyan Tun, Alyssa Reyes,
+% and Mark Kim
 function [h_y,itc] = secant_method(x0, x1, TOL, Nmax )
 
 %SECANT_METHOD     approximate the root of an arbitrary function using 
@@ -43,7 +43,7 @@ while abs(f_x1) > TOL && itc < Nmax
     itc = itc + 1;
     [x f_x1]
     [x0 x1 f_x0 f_x1]
-    subplot(4,4,itc);
+    subplot(4,2,itc);
     
     plot(h_x, h_y, 'b-', [x0, x1], [f_x0, f_x1], 'r-');
     title("Plot of f(x) with secant at x" + (itc) + ".")
