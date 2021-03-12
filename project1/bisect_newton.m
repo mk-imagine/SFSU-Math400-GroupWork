@@ -114,7 +114,7 @@ function c = bisect_newton(a, b, delta, s)
             xlabel('x'); 
             ylabel('f(x)');
             counter = counter + 1;      % increment total counter
-            nc = nc + 1                 % increment newton counter
+            nc = nc + 1;                 % increment newton counter
             % disp('...press enter to continue') % Pausing for debugging
             % pause on; pause;
 
