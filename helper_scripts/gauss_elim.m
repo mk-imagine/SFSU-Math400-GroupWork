@@ -4,7 +4,7 @@ function [x, L, U] = gauss_elim ( A, b )
 %             with back substitution
 %
 %     calling sequences:
-%             x = gauss_elim ( A, b )
+%             [x, L, U] = gauss_elim ( A, b )
 %             gauss_elim ( A, b )
 %
 %     inputs:
@@ -14,6 +14,8 @@ function [x, L, U] = gauss_elim ( A, b )
 %
 %     output:
 %             x       solution vector (i.e., vector for which Ax = b)
+%             L       L matrix
+%             U       U matrix
 %
 %     NOTE:
 %             this is intended as a demonstration routine - no pivoting

@@ -1,5 +1,22 @@
+% LU Factorization Script
+% 
+%     calling sequences:
+%             [y,x] = LUFactor ( L, U, b )
+%
+%     inputs:
+%             L       L Matrix
+%             U       U Matrix
+%             b       right-hand side vector
+%
+%     output:
+%             y       Solution vector from Ly=b (forward substitution)
+%             x       Solution vector from Ux=y (back substitution)
+
+
 function [y,x] = LUFactor(L, U, b)
 [nrow,ncol] = size(L);
+
+% Forward Substitution
 y=zeros(1, nrow);
 y(1) = b(1);
 for i = 2:nrow
@@ -11,6 +28,7 @@ for i = 2:nrow
     y(i) = sum(T);
 end
 
+% Back Substitution
 c = y.';
 [nrow,ncol] = size(U);
 x(nrow) = c(nrow) / U(nrow, nrow);
