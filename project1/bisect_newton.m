@@ -1,7 +1,7 @@
 % March 5, 2021
 % Project 1, Problem 3d
 % Code heavily based off of sample files provided on iLearn
-% Mark Kim (primary coder), Amber Hartigan, Nyan Tun, Alyssa Reyes,
+% Mark Kim (primary coder), Nyan Tun (primary coder), Amber Hartigan, Alyssa Reyes,
 % and Adrian Lopez
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
