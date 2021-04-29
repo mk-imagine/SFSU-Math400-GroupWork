@@ -19,8 +19,8 @@ B = [1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0;
 0	0	0	0	0	0	0	1	2	3	2	4	6	3	6	9];
 [lu, pvt, lupivoted] = LUfactor(B);
 
-syms x y;
-f1=exp(-(x^2+y^2));
+syms x y;  % symbolic representation for x and y
+f1 = exp(-(x^2+y^2));
 f1x = diff(f1,x);
 f1y = diff(f1,y);
 f1xy = diff(f1x,y);

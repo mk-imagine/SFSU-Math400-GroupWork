@@ -53,13 +53,12 @@ for i = 1 : nrow - 1
 
     rr=pvt(i:nrow);
     [x ,t]=max(abs(A(rr,i))); t=t+i-1;
-    % fprintf ( 'Pivot: %d', x );
+    fprintf ( 'Pivot: %d', x );
     if ( t ~= i )
 	   temp = pvt(i);
 	   pvt(i) = pvt(t);
 	   pvt(t) = temp;
     end
-
 %
 %   terminate if matrix is singular
 %
@@ -79,7 +78,8 @@ for i = 1 : nrow - 1
 		A(pvt(j),i) = m;
 		A(pvt(j), i+1:nrow) = A(pvt(j), i+1:nrow) - m * A(pvt(i), i+1:nrow);
     end
-    %pause
+%     A
+%     pause
 end
 lu = A;
 lupivoted = A(pvt,:);
