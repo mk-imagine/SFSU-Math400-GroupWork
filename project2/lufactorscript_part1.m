@@ -135,3 +135,92 @@ for i=1:4
 end
 f2xy_1norm_err = norm(exact_f2xy-estimate_f2xy,1);
 f2xy_2norm_err = norm(exact_f2xy-estimate_f2xy);
+
+%% Reporting of data
+fprintf('\nPart 1a\n');
+a_vec = ["a00", "a10", "a20", "a30", "a01", "a02", "a03", "a11", "a21", "a31", "a12", "a22", "a32", "a13", "a23", "a33"].';
+for i=1:16
+    t_index = 1 + mod(i-1,4);
+    str = sprintf("f(%d,%d) =", t(t_index,1), t(t_index,2));
+    for j=1:16
+       if B(i,j)~=0
+           if B(i,j) == 1
+               if str == sprintf("f(%d,%d) =", t(t_index,1), t(t_index,2))
+                   str = str + " " + a_vec(j);
+               else
+                   str = str + " + " + a_vec(j);
+               end
+           else
+               if str == sprintf("f(%d,%d) =", t(t_index,1), t(t_index,2))
+                   str = str + " " + a_vec(j) + "*" + char(v(j));
+               else
+                   str = str + " + " + a_vec(j) + "*" + char(v(j));
+               end
+           end
+           
+       end
+    end
+    disp(str);
+end
+pause
+
+fprintf('\nPart 1b\n');
+fprintf('B matrix:\n');
+B
+fprintf('\nAlpha matrix:\n');
+a_vec
+fprintf('\nFunction matrix:\n');
+str = string(zeros(16,1));
+for i=1:4
+    str(i) = sprintf("f(%d,%d)", t(i,1), t(i,2));
+    str(i+4) = sprintf("fx(%d,%d)", t(i,1), t(i,2));
+    str(i+8) = sprintf("fy(%d,%d)", t(i,1), t(i,2));
+    str(i+12) = sprintf("fxy(%d,%d)", t(i,1), t(i,2));
+end
+str
+pause
+
+fprintf('\nPart 1c\n');
+fprintf('LU factorization\n');
+lu % lu matrix
+pvt % pvt vector
+pause
+
+fprintf('\nPart 1d\n');
+fprintf('e^(-(x^2+y^2))\n');
+fprintf('Estimates:\n');
+for i=1:4
+    fprintf('f(%.2f,%.2f) = %.6f \n', values_to_estimate(i,:), estimate_f1(i));
+end
+fprintf('1-norm error = %6f\n', f1_1norm_err);
+fprintf('2-norm error = %6f\n\n', f1_2norm_err);
+for i=1:4
+    fprintf('fx(%.2f,%.2f) = %.6f \n', values_to_estimate(i,:), estimate_f1x(i));
+end
+fprintf('1-norm error = %6f\n', f1x_1norm_err);
+fprintf('2-norm error = %6f\n\n', f1x_2norm_err);
+for i=1:4
+    fprintf('fxy(%.2f,%.2f) = %.6f \n', values_to_estimate(i,:), estimate_f1xy(i));
+end
+fprintf('1-norm error = %6f\n', f1xy_1norm_err);
+fprintf('2-norm error = %6f\n\n', f1xy_2norm_err);
+pause
+
+fprintf('\nPart 1e\n');
+fprintf('tanh(xy)\n');
+fprintf('Estimates:\n');
+for i=1:4
+    fprintf('f(%.2f,%.2f) = %.6f \n', values_to_estimate(i,:), estimate_f2(i));
+end
+fprintf('1-norm error = %6f\n', f2_1norm_err);
+fprintf('2-norm error = %6f\n\n', f2_2norm_err);
+for i=1:4
+    fprintf('fx(%.2f,%.2f) = %.6f \n', values_to_estimate(i,:), estimate_f2x(i));
+end
+fprintf('1-norm error = %6f\n', f2x_1norm_err);
+fprintf('2-norm error = %6f\n\n', f2x_2norm_err);
+for i=1:4
+    fprintf('fxy(%.2f,%.2f) = %.6f \n', values_to_estimate(i,:), estimate_f2xy(i));
+end
+fprintf('1-norm error = %6f\n', f2xy_1norm_err);
+fprintf('2-norm error = %6f\n\n', f2xy_2norm_err);

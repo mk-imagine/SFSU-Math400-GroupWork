@@ -20,13 +20,13 @@ v = [1, x, x^2, x^3, y, y^2, y^3, x*y, x^2*y, x^3*y, x*y^2, x^2*y^2, x^3*y^2, x*
 vx = diff(v, x);
 vy = diff(v, y);
 vxy = diff(vx, y);
-B = zeros(16, 16);
 
 %% conditions for interpolation
 t = [0 0; 1 0; 0 1; 1 1];   % corners of unit square for finding alpha vector (x,y)
 u = 0.5;  % evaluation point for last 4 conditions (0.5, 0.5)
 
 %% Calculation of matrix B
+B = zeros(16, 16);
 for i=1:4
     B(i,:) = subs(v, [x,y], [t(i, 1), t(i, 2)]);
     B(i+4,:) = subs(vx, [x,y], [t(i, 1), t(i, 2)]);
