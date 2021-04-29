@@ -53,7 +53,7 @@ for i = 1 : nrow - 1
 
     rr=pvt(i:nrow);
     [x ,t]=max(abs(A(rr,i))); t=t+i-1;
-    fprintf ( 'Pivot: %d', x );
+%     fprintf ( 'Pivot: %d', x );
     if ( t ~= i )
 	   temp = pvt(i);
 	   pvt(i) = pvt(t);

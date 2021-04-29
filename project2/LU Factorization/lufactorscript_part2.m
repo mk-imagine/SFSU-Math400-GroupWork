@@ -1,22 +1,42 @@
 
-% p = alpha(1)+alpha(2)*x+alpha(3)*x^2+alpha(4)*x^3+alpha(5)*y+alpha(6)*y^2+alpha(7)*y^3+alpha(8)*x*y+alpha(9)*x^2*y+alpha(10)*x^3*y+alpha(11)*x*y^2+alpha(12)*x^2*y^2+alpha(13)*x^3*y^2+alpha(14)*x*y^3+alpha(15)*x^2*y^3+alpha(16)*x^3*y^3;
+% p = alpha(1)+alpha(2)*x+alpha(3)*x^2+alpha(4)*x^3+alpha(5)*y+alpha(6)*y^2+alpha(7)*y^3
+% +alpha(8)*x*y+alpha(9)*x^2*y+alpha(10)*x^3*y+alpha(11)*x*y^2+alpha(12)*x^2*y^2+alpha(13)*x^3*y^2
+% +alpha(14)*x*y^3+alpha(15)*x^2*y^3+alpha(16)*x^3*y^3;
 
-B = [1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0;
-1	1	1	1	0	0	0	0	0	0	0	0	0	0	0	0;
-1	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0;
-1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1;
-0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0;
-0	1	2	3	0	0	0	0	0	0	0	0	0	0	0	0;
-0	1	0	0	0	0	0	1	0	0	1	0	0	1	0	0;
-0	1	2	3	0	0	0	1	2	3	1	2	3	1	2	3;
-0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0;
-0	0	0	0	1	0	0	1	1	1	0	0	0	0	0	0;
-0	0	0	0	1	2	3	0	0	0	0	0	0	0	0	0;
-0	0	0	0	1	2	3	1	1	1	2	2	2	3	3	3;
-0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0;
-0	0	0	0	0	0	0	1	2	3	0	0	0	0	0	0;
-0	0	0	0	0	0	0	1	0	0	2	0	0	3	0	0;
-0	0	0	0	0	0	0	1	2	3	2	4	6	3	6	9];
+% v is the x,y vector
+% polynomials
+v = [1, x, x^2, x^3, y, y^2, y^3, x*y, x^2*y, x^3*y, x*y^2, x^2*y^2, x^3*y^2, x*y^3, x^2*y^3, x^3*y^3].';
+vx = diff(v, x);
+vy = diff(v, y);
+vxy = diff(vx, y);
+B = zeros(16, 16);
+
+t = [0 0; 1 0; 0 1; 1 1];   % corners of unit square for finding alpha vector (x,y)
+
+for i=1:4
+    B(i,:) = subs(v, [x,y], [t(i, 1), t(i, 2)]);
+    B(i+4,:) = subs(vx, [x,y], [t(i, 1), t(i, 2)]);
+    B(i+8,:) = subs(vy, [x,y], [t(i, 1), t(i, 2)]);
+    B(i+12,:) = subs(vxy, [x,y], [t(i, 1), t(i, 2)]);
+end
+
+% B = [1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0;
+% 1	1	1	1	0	0	0	0	0	0	0	0	0	0	0	0;
+% 1	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0;
+% 1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1;
+% 0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0;
+% 0	1	2	3	0	0	0	0	0	0	0	0	0	0	0	0;
+% 0	1	0	0	0	0	0	1	0	0	1	0	0	1	0	0;
+% 0	1	2	3	0	0	0	1	2	3	1	2	3	1	2	3;
+% 0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0;
+% 0	0	0	0	1	0	0	1	1	1	0	0	0	0	0	0;
+% 0	0	0	0	1	2	3	0	0	0	0	0	0	0	0	0;
+% 0	0	0	0	1	2	3	1	1	1	2	2	2	3	3	3;
+% 0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0;
+% 0	0	0	0	0	0	0	1	2	3	0	0	0	0	0	0;
+% 0	0	0	0	0	0	0	1	0	0	2	0	0	3	0	0;
+% 0	0	0	0	0	0	0	1	2	3	2	4	6	3	6	9];
+
 [lu, pvt, lupivoted] = LUfactor(B);
 
 syms x y;  % symbolic representation for x and y
@@ -30,7 +50,6 @@ f2x = diff(f2,x);
 f2y = diff(f2,y);
 f2xy = diff(f2x,y);
 
-t = [0 0; 1 0; 0 1; 1 1];   % corners of unit square for finding alpha vector (x,y)
 s1 = zeros(16,1);            % solution vector for f(x,y)=exp(-(x^2+y^2)) from t
 s2 = zeros(16,1);            % solution vector for f(x,y)=tanh(x*y) from t
 for i=1:4
@@ -50,6 +69,9 @@ alpha2 = LUsolve(lu, s2, pvt);  % alpha vector (coefficients of the function) fo
 
 % v is the x,y vector polynomials
 v = [1, x, x^2, x^3, y, y^2, y^3, x*y, x^2*y, x^3*y, x*y^2, x^2*y^2, x^3*y^2, x*y^3, x^2*y^3, x^3*y^3].';
+vx = diff(v, x);
+vy = diff(v, y);
+vxy = diff(vx, y);
 
 p1 = alpha1*v; % p(x,y) estimate for f(x,y)=exp(-(x^2+y^2))
 p2 = alpha2*v; % p(x,y) estimate for f(x,y)=tanh(x*y)
