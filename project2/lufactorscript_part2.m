@@ -167,7 +167,7 @@ for i=1:16
 end
 pause
 
-fprintf('\nPart 1b\n');
+fprintf('\nPart 2b\n');
 fprintf('B matrix:\n');
 B
 fprintf('\nAlpha matrix:\n');
