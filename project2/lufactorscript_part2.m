@@ -140,7 +140,7 @@ f2xy_1norm_err = norm(exact_f2xy-estimate_f2xy,1);
 f2xy_2norm_err = norm(exact_f2xy-estimate_f2xy);
 
 %% Reporting of data
-fprintf('\nPart 1a\n');
+fprintf('\nPart 2a\n');
 a_vec = ["a00", "a10", "a20", "a30", "a01", "a02", "a03", "a11", "a21", "a31", "a12", "a22", "a32", "a13", "a23", "a33"].';
 for i=1:16
     t_index = 1 + mod(i-1,4);
@@ -183,13 +183,13 @@ end
 str
 pause
 
-fprintf('\nPart 1c\n');
+fprintf('\nPart 2c\n');
 fprintf('LU factorization\n');
 lu % lu matrix
 pvt % pvt vector
 pause
 
-fprintf('\nPart 1d\n');
+fprintf('\nPart 2d\n');
 fprintf('e^(-(x^2+y^2))\n');
 fprintf('Estimates:\n');
 for i=1:4
@@ -209,7 +209,7 @@ fprintf('1-norm error = %6f\n', f1xy_1norm_err);
 fprintf('2-norm error = %6f\n\n', f1xy_2norm_err);
 pause
 
-fprintf('\nPart 1e\n');
+fprintf('\nPart 2e\n');
 fprintf('tanh(xy)\n');
 fprintf('Estimates:\n');
 for i=1:4
