@@ -137,7 +137,7 @@ f2xy_1norm_err = norm(exact_f2xy-estimate_f2xy,1);
 f2xy_2norm_err = norm(exact_f2xy-estimate_f2xy);
 
 %% Reporting of data
-% fprintf('\nPart 1a\n');
+fprintf('\nPart 1a\n');
 a_vec = ["a00", "a10", "a20", "a30", "a01", "a02", "a03", "a11", "a21", "a31", "a12", "a22", "a32", "a13", "a23", "a33"].';
 for i=1:16
     t_index = 1 + mod(i-1,4);
@@ -160,16 +160,16 @@ for i=1:16
            
        end
     end
-%     disp(str);
+    disp(str);
 end
-% pause
-% 
-% fprintf('\nPart 1b\n');
-% fprintf('B matrix:\n');
-% B
-% fprintf('\nAlpha matrix:\n');
-% a_vec
-% fprintf('\nFunction matrix:\n');
+pause
+
+fprintf('\nPart 1b\n');
+fprintf('B matrix:\n');
+B
+fprintf('\nAlpha matrix:\n');
+a_vec
+fprintf('\nFunction matrix:\n');
 str = string(zeros(16,1));
 for i=1:4
     str(i) = sprintf("f(%d,%d)", t(i,1), t(i,2));
@@ -177,14 +177,14 @@ for i=1:4
     str(i+8) = sprintf("fy(%d,%d)", t(i,1), t(i,2));
     str(i+12) = sprintf("fxy(%d,%d)", t(i,1), t(i,2));
 end
-% str
-% pause
-% 
-% fprintf('\nPart 1c\n');
-% fprintf('LU factorization\n');
-% lu % lu matrix
-% pvt % pvt vector
-% pause
+str
+pause
+
+fprintf('\nPart 1c\n');
+fprintf('LU factorization\n');
+lu % lu matrix
+pvt % pvt vector
+pause
 
 fprintf('\nPart 1d\n');
 fprintf('e^(-(x^2+y^2))\n');
