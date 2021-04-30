@@ -1,0 +1,20 @@
+After the LU factorization of matrix B is complete, we can move onto section d and e of part 1.  
+To solve for our alpha vector, we need to first find the answers to our solution vector, which we named s1 and s2
+Notice that in our script, we have stored our two functions symbolically...
+The first function is e to the negative x squared plus y squared, with our second function being the hyberbolic tangent of x times y.
+Using MatLab, we calculated and stored the partial derivatives of each function.
+Next, we declare and initialize our solution vectors and calculate the solution vectors with the following for loop.
+
+This loop simply iterates through our t matrix which contains the points at which we need to evaluate each function and saves the solutions in the solution vectors.
+
+With our solution vector completed and the LU factorization of matrix B, we can solve for alpha, our coefficient vectors, which we do with the LUsolve function that was provided to us on iLearn.
+
+Now that we have the alpha vector, we can multiply it with the v vector to produce our polynomial to estimate the functions.
+
+To simplify the calculations of the functions, we entered the values we wanted to estimate in an array here.
+
+Following this are the exact calculations of the function at the points supplied and the estimate from the polynomial.  Here, we did the calculations for the first function.  We simply substituted the values of x and y with the values in our array.  Then following this, we calculated the 1-norm error and the 2-norm error.
+
+This code was repeated for each estimation for the partial derivatives as well as with our second function.
+
+Past this point is the reporting of the data to the console.  Now, when I run the script, the data is reported as follows...
